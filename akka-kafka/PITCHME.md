@@ -1,9 +1,20 @@
-# Akka and Kafka
+@title[Akka and Kafka]
 
+@snap[west split-screen-heading span-50]
+Akka and Kafka at Tradecloud
+@snapend
+
+@snap[east text-white span-45]
+@size[0.3m]Marcel Matthijs
+@size[0.3m]marcel@tradecloud.nl
+@snapend
 ---
 ### Kafka for dummies
 
-@size[2.0em](https://thenewstack.io/apache-kafka-primer/)
+![Test](akka-kafka/img/marathon-small.png)
+
+
+@size[0.2m](https://thenewstack.io/apache-kafka-primer/)
 ---
 ### Requirements that justify Kafka 
 
