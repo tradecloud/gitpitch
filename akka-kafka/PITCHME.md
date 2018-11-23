@@ -23,17 +23,28 @@
 @snap[east kafka-arch span-45]
 @color[white]
 @ul[](false)
-- bla bla
-- bla bla bla
-- bla bla bla bla
+- producer -publishes-> message (bytes)
+- message -published to-> topic
+- message -written to-> partition
+- partition -replicates over-> cluster
+- consumer -connects to-> partition
+- consumer(group) -subscribes to-> topic
+- consumer(group) -maintains-> offset
 @ulend
 @snapend
 
+Note:
+- test
 ---
 ### Requirements that justify Kafka 
+Messaging System
+Storage System
+Stream Processing
 
 ---
-### Drawbacks of Kafka
+### Pros and cons of Kafka
+Versus MOM
+
 
 ---
 ### Event-driven architecture
@@ -43,6 +54,12 @@
 
 ---
 ### Clustered infrastructure
+
+Broker
+Cluster
+Zookeeper
+One cluster, multi DC in one region
+Multiple regions, use replication
 
 ---
 ### Alpakka Kafka 
