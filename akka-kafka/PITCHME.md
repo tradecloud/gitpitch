@@ -1,3 +1,4 @@
+theme-override : assets/css/custom.css
 ---?image=img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 
 @snap[west title span-50]
