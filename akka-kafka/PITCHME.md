@@ -1,14 +1,14 @@
-theme-override : assets/css/custom.css
 ---?image=img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 
 @snap[west title span-50]
+@color[white]
 @size[1.5em]Akka and Kafka at Tradecloud
 @snapend
 
 @snap[east contact span-45]
 ![](img/tradecloud_platform_logo1_hq.png)
-@size[0.3em]Marcel Matthijs
-@size[0.3em]marcel@tradecloud.nl
+@size[0.5em]Marcel Matthijs
+@size[0.5em]marcel@tradecloud.nl
 @snapend
 ---?image=img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @snap[north-west]
@@ -16,16 +16,17 @@ theme-override : assets/css/custom.css
 @snapend
 
 @snap[west kafka-arch-details span-50]
+![](akka-kafka/img/kafka-architecture.png)
+@size[0.3em](https://thenewstack.io/apache-kafka-primer/)
+@snapend
+
+@snap[east kafka-arch span-45]
+@color[white]
 @ul[](false)
 - bla bla
 - bla bla bla
 - bla bla bla bla
 @ulend
-@snapend
-
-@snap[east kafka-arch span-45]
-![](akka-kafka/img/kafka-architecture.png)
-@size[0.2em](https://thenewstack.io/apache-kafka-primer/)
 @snapend
 
 ---
