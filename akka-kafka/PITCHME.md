@@ -15,7 +15,6 @@ https://www.packet.com/cloud/servers/
 @snap[east contact span-45]
 @size[1.5em](Marcel Matthijs)  
 @size[1.0em](marcel@tradecloud.nl)
-@size[1.0em]
 @snapend
 
 @snap[south-east span-45]
@@ -127,12 +126,41 @@ https://github.com/linkedin/Burrow
 https://github.com/yahoo/kafka-manager 
 https://www.confluent.io/product/confluent-enterprise/
 @snapend
----
-### Event-driven architecture
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Event-driven components]
+@snap[north-west]
+@size[1.0em](Event-driven components)
+@snapend
 
----
-### Software architecture
+![](akka-kafka/assets/img/event-driven-components.svg)
 
+@snap[south-west tc-link]
+https://martinfowler.com/articles/201701-event-driven.html
+@snapend
+
+---?image=assets/img/bg/tradecloud-light-blue.png
+@title[Event-driven flow]
+@snap[north-west]
+@size[1.0em](Event-driven flow)
+@snapend
+
+![](akka-kafka/assets/img/event-driven-flow.svg)
+
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Stateful service components]
+@snap[north-west]
+@size[1.0em](Stateful service components)
+@snapend
+
+![](akka-kafka/assets/img/stateful-service-components.svg)
+
+---?image=assets/img/bg/tradecloud-light-blue.png
+@title[Stateful service flow]
+@snap[north-west]
+@size[1.0em](Stateful service flow)
+@snapend
+
+![](akka-kafka/assets/img/stateful-service-flow.svg)
 ---
 ### Clustered infrastructure
 
@@ -184,10 +212,20 @@ Publisher
 
 Subscriber
 Publisher
+---?image=assets/img/bg/201612-foto-yesdelft-met-rutte.jpg&opacity=60
+@title[Wrap up]
+@snap[north-west]
+@size[1.0em](Wrap up)
+@snapend
 
----
-### Wrap up
+@snap[west contact span-50]
+@size[1.5em](Questions?)  
+@snapend
 
-Contact
+@snap[east contact span-45]
+@size[1.5em](Marcel Matthijs)  
+@size[1.0em](marcel@tradecloud.nl)
+@size[1.0em](YES!Delft building)
+@snapend
 
-
+---?video=https://www.yesdelft.com/wp-content/themes/yesdelft-website/assets/vid/header-video.mp4
