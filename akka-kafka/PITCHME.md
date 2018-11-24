@@ -21,6 +21,11 @@ https://www.packet.com/cloud/servers/
 @size[0.8em](https://www.tradecloud1.com)
 @snapend
 
+Note:
+- Show Tradecloud site
+- Show open19 project
+- Show packet.net server
+
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Kafka for managers]
 
@@ -52,6 +57,7 @@ https://thenewstack.io/apache-kafka-primer/
 
 Note:
 - show Kafka manager - one topic - 2 partitions - consumers
+- Consumers groups
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Use cases of Kafka]
@@ -87,7 +93,10 @@ https://kafka.apache.org/documentation/streams/
 @snapend
 
 Note:
-- 
+- Show Samza site
+- Show Fabric site, tell about Simplified Byzantine Fault Tolerance alternative
+- Show Kafka streams usrs
+
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Pro's and cons of Kafka]
 @snap[north-west]
@@ -126,6 +135,12 @@ https://github.com/linkedin/Burrow
 https://github.com/yahoo/kafka-manager 
 https://www.confluent.io/product/confluent-enterprise/
 @snapend
+
+Note:
+- Show LinkedIn Kafka scale
+- Show and scroll through Kafka configuration page
+- Show Burrow features
+
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Event-driven components]
 @snap[north-west]
@@ -138,6 +153,10 @@ https://www.confluent.io/product/confluent-enterprise/
 https://martinfowler.com/articles/201701-event-driven.html
 @snapend
 
+Note:
+- Show Fowler article, What do you mean by “Event-Driven”?
+- Show write and read side
+
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Event-driven flow]
 @snap[north-west]
@@ -145,6 +164,10 @@ https://martinfowler.com/articles/201701-event-driven.html
 @snapend
 
 ![](akka-kafka/assets/img/event-driven-flow.svg)
+
+Note:
+- Show user / portal is asynchronous
+- Show order: 1. Publish 2. Persist 3. Push websocket
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Stateful service components]
@@ -154,6 +177,9 @@ https://martinfowler.com/articles/201701-event-driven.html
 
 ![](akka-kafka/assets/img/stateful-service-components.svg)
 
+Note:
+-
+
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Stateful service flow]
 @snap[north-west]
@@ -161,28 +187,46 @@ https://martinfowler.com/articles/201701-event-driven.html
 @snapend
 
 ![](akka-kafka/assets/img/stateful-service-flow.svg)
----
-### Clustered infrastructure
-
-Broker
-Cluster
-Zookeeper
-One cluster, multi DC in one region
-Multiple regions, use replication
-
----
-### Broker configuration
-
 
 Note:
+- EntityActor uses Cluster Sharding and auto-passivation
+- Order of 1. Publish 2. Persist -> Lightbend Lagom
+- Akka 2.5.18 https://github.com/akka/akka/issues/25512 auto-passivation in Sharding Typed
+
+---?image=akka-kafka/assets/img/bg/monit-kafka.png&opacity=40
+@title[Clustered infrastructure]
+@snap[north-west]
+@size[1.0em](Clustered infrastructure)
+@snapend
+
+![](akka-kafka/assets/img/kafka-deployment.svg)
+
+Note:
+-
+
+---?image=akka-kafka/assets/img/bg/kafka-server-properties.png&opacity=40
+@title[Kafka broker configuration]
+@snap[north-west]
+@size[1.0em](Kafka broker configuration)
+<br>  
+@size[0.8em](Use documentation defaults, not distribution defaults)  
+@size[0.8em](When using only one DC, persist the log, but not in /tmp)
+
+@snapend
+
+@snap[south-west span-50]
+```
+num.partitions=2  
+default.replication.factor=3  
+min.insync.replicas=2  
+offsets.topic.replication.factor=3  
+offsets.retention.minutes=10080  
+log.dir=/opt/kafka/spool  
 controlled.shutdown.enable=true
-default.replication.factor=3
-min.insync.replicas=2
-default.replication.factor=3
-offsets.topic.replication.factor=3
-offsets.retention.minutes=10080
-num.partitions=2
-log.dir=/opt/kafka/spool
+```
+@snapend
+
+Note:
 - /opt/kafka/kafka_1.1.1/config/server.properties
 - broker log.dir when using only one DC, persist the log, but not in /tmp
 - consumer auto.offset.reset latest
