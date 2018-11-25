@@ -26,11 +26,29 @@ Note:
 - Show open19 project
 - Show packet.net server
 
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Menu]
+
+@snap[north-west span-35]
+@box[bg-green text-white](Kafka#for managers<br>Use cases<br>Pro's and cons)
+@snapend
+
+@snap[north-east span-35]
+@box[bg-orange text-white rounded](Architecture#Event driven<br>Service<br>Infrastructure<br>Configuration)
+@snapend
+
+@snap[south-west span-35]
+@box[bg-blue text-white waved](Messages#Structure<br>Metadata<br>Serialization)
+@snapend
+
+@snap[south-east span-35]
+@box[bg-pink text-white](Libraries#akka-stream-kafka<br>akka-kafka)
+@snapend
+
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Kafka for managers]
-
 @snap[north-west]
-@size[1.3em](Kafka for managers)
+@box[bg-green text-white tc-small-box](Kafka#for managers)
 @snapend
 
 @snap[west kafka-arch-details span-50]
@@ -62,7 +80,7 @@ Note:
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Use cases of Kafka]
 @snap[north-west]
-@size[1.3em](Use cases of Kafka)
+@box[bg-green text-white tc-small-box](Kafka#use cases)
 @snapend
 
 @snap[west span-50]
@@ -100,7 +118,7 @@ Note:
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Pro's and cons of Kafka]
 @snap[north-west]
-@size[1.3em](Pro's of Kafka)
+@box[bg-green text-white tc-small-box](Kafka#Pro's)
 @snapend
 
 @snap[west span-50]
@@ -114,14 +132,13 @@ Easy of use @size[0.5em](- *for producers/consumers*)
 https://engineering.linkedin.com/kafka/running-kafka-scale
 @snapend
 
-@snap[north-east span-45]
-@size[1.3em](Cons of Kafka)
+@snap[north-east]
+@box[bg-green text-white tc-small-box](Kafka#Cons)
 @snapend
 
 @snap[east span-45]
-@size[1.0em]
-@size[0.9em](No protocols) @size[0.5em](- *API's*)
-@size[0.9em](Deployment) @size[0.5em](- *Zookeeper*)  
+<br>
+@size[0.8em](Deployment) @size[0.5em](- *Zookeeper*)  
 @size[0.8em](Configuration) @size[0.4em](- *producer, broker, consumer*)  
 @size[0.8em](Monitoring) @size[0.4em](- *Burrow, Confluent Enterprise*)  
 @size[0.8em](Management) @size[0.5em](- *Kafka manager, Confluent*)  
@@ -143,10 +160,9 @@ Note:
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Event-driven components]
-@snap[north-west]
-@size[1.0em](Event-driven components)
+@snap[north-west span-20]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Event driven components)
 @snapend
-
 ![](akka-kafka/assets/img/event-driven-components.svg)
 
 @snap[south-west tc-link]
@@ -159,11 +175,14 @@ Note:
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Event-driven flow]
-@snap[north-west]
-@size[1.0em](Event-driven flow)
+@snap[north-west span-25]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Event driven flow)
 @snapend
 
+@snap[center]
+<br>
 ![](akka-kafka/assets/img/event-driven-flow.svg)
+@snapend
 
 Note:
 - Show user / portal is asynchronous
@@ -171,10 +190,9 @@ Note:
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Stateful service components]
-@snap[north-west]
-@size[1.0em](Stateful service components)
+@snap[north-west span-20]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Stateful service components)
 @snapend
-
 ![](akka-kafka/assets/img/stateful-service-components.svg)
 
 Note:
@@ -182,11 +200,14 @@ Note:
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Stateful service flow]
-@snap[north-west]
-@size[1.0em](Stateful service flow)
+@snap[north-west span-25]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Stateful service flow)
 @snapend
 
+@snap[center]
+<br>
 ![](akka-kafka/assets/img/stateful-service-flow.svg)
+@snapend
 
 Note:
 - EntityActor uses Cluster Sharding and auto-passivation
@@ -195,27 +216,32 @@ Note:
 
 ---?image=akka-kafka/assets/img/bg/monit-kafka.png&opacity=40
 @title[Clustered infrastructure]
-@snap[north-west]
-@size[1.0em](Clustered infrastructure)
+@snap[north-west span-25]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Clustered infrastructure)
 @snapend
 
 ![](akka-kafka/assets/img/kafka-deployment.svg)
 
 Note:
--
+- Zookeeper - master
+- Broker - controller
+- partition - leader / follower
+- Consuomer group
 
 ---?image=akka-kafka/assets/img/bg/kafka-server-properties.png&opacity=40
-@title[Kafka broker configuration]
-@snap[north-west]
-@size[1.0em](Kafka broker configuration)
-<br>  
-@size[0.8em](Use documentation defaults, not distribution defaults)  
-@size[0.8em](When using only one DC, persist the log, but not in /tmp)
-
+@title[Broker configuration]
+@snap[north-west span-25]
+@box[bg-orange text-white rounded tc-small-box](Architecture#Broker configuration)
 @snapend
 
-@snap[south-west span-50]
-```
+@snap[north-west]
+<br>
+<br>
+@size[0.6em](Use documentation defaults, not distribution defaults)  
+@size[0.6em](When using only one DC, persist the log, but not in /tmp)
+@snapend
+
+```console
 num.partitions=2  
 default.replication.factor=3  
 min.insync.replicas=2  
@@ -224,6 +250,9 @@ offsets.retention.minutes=10080
 log.dir=/opt/kafka/spool  
 controlled.shutdown.enable=true
 ```
+
+@snap[south-west tc-link span-45]
+https://kafka.apache.org/documentation/#configuration
 @snapend
 
 Note:
@@ -232,19 +261,72 @@ Note:
 - consumer auto.offset.reset latest
 - Use broker documentation defaults, not distribution defaults nor examples
 
----
-### Alpakka Kafka 
+---?image=akka-kafka/assets/img/bg/alpakkas.jpg&opacity=40
+@title[Alpakka Kafka]
+@snap[north-west span-25]
+@box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka)
+@snapend
 
-https://github.com/akka/alpakka-kafka
+```scala
+  val control =
+    Consumer
+      .committableSource(consumerSettings, 
+        Subscriptions.topics(topic))
+      .mapAsync(10) { msg =>
+        business(msg.record.key, msg.record.value).map(
+          _ => msg.committableOffset)
+      }
+      .mapAsync(5)(offset => offset.commitScaladsl())
+      .toMat(Sink.seq)(Keep.both)
+      .mapMaterializedValue(DrainingControl.apply)
+      .run()
+
+def business(key: String, value: Array[Byte]): 
+  Future[Done] = // ???
+```
+
+@snap[south-west tc-link span-45]
+https://developer.lightbend.com/docs/alpakka/current/
 https://doc.akka.io/docs/akka-stream-kafka/current/
----
-### Tradecloud Akka-Kafka
+https://github.com/akka/alpakka-kafka
+@snapend
 
-Wrapper around alpakka-kafka
-Resilience
-Akka Serialization
+Note:
+- marketing Alpakka Kafka, library akka-stream-kafka
+- Camel still maintained, but Kakfa docs do not look good 
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Tradecloud Akka Kafka]
+@snap[north-west span-25]
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka)
+@snapend
 
+```scala
+new KafkaSubscriber(
+    group = "some_group_name",
+    topics = Set("some_topic")
+  ).atLeastOnce(
+    Flow[String]
+      .map { wrapper: KafkaMessage[String] =>
+        println(wrapper.msg + "-world")
+        msg.offset
+      }
+  )
+```
+
+```scala
+val publisher = new KafkaPublisher()
+publisher.publish("topic", msg)
+```
+
+@snap[south-west tc-link span-45]
 https://github.com/tradecloud/akka-kafka
+https://doc.akka.io/docs/akka/current/serialization.html
+@snapend
+
+Note:
+- Wrapper around akka-stream-kafka
+- Resilience
+- Akka Serialization
 ---
 ### Akka-Kafka inner workings
 
@@ -273,3 +355,7 @@ Publisher
 @snapend
 
 ---?video=https://www.yesdelft.com/wp-content/themes/yesdelft-website/assets/vid/header-video.mp4
+@title[Join Tradecloud]
+Join Tradecloud at YES!Delft  
+Senior Scala Developer  
+https://jobs.tradecloud.nl/o/scala-backend-developer

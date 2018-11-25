@@ -2,3 +2,4 @@ theme : black
 theme-override : assets/css/custom.css
 logo : assets/img/logo/tradecloud_platform_logo1_w_hq.png
 logo-position : top-right
+highlight : monokai
