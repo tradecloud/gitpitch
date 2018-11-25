@@ -25,6 +25,7 @@ Note:
 - Show Tradecloud site
 - Show open19 project
 - Show packet.net server
+- ASK FOR QUESTIONS DURING THE PRESENTATION
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Menu]
@@ -74,8 +75,8 @@ https://thenewstack.io/apache-kafka-primer/
 @snapend
 
 Note:
-- show Kafka manager - one topic - 2 partitions - consumers
-- Consumers groups
+- Show Kafka manager - one topic - 2 partitions - consumers
+- Explain consumers groups
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Use cases of Kafka]
@@ -113,7 +114,6 @@ https://kafka.apache.org/documentation/streams/
 Note:
 - Show Samza site
 - Show Fabric site, tell about Simplified Byzantine Fault Tolerance alternative
-- Show Kafka streams usrs
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Pro's and cons of Kafka]
@@ -163,7 +163,7 @@ Note:
 @snap[north-west span-20]
 @box[bg-orange text-white rounded tc-small-box](Architecture#Event driven components)
 @snapend
-![](akka-kafka/assets/img/event-driven-components.svg)
+![](akka-kafka/assets/img/event-driven-components.png)
 
 @snap[south-west tc-link]
 https://martinfowler.com/articles/201701-event-driven.html
@@ -171,7 +171,7 @@ https://martinfowler.com/articles/201701-event-driven.html
 
 Note:
 - Show Fowler article, What do you mean by “Event-Driven”?
-- Show write and read side
+- Explain write and read side
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Event-driven flow]
@@ -181,22 +181,23 @@ Note:
 
 @snap[center]
 <br>
-![](akka-kafka/assets/img/event-driven-flow.svg)
+![](akka-kafka/assets/img/event-driven-flow.png)
 @snapend
 
 Note:
-- Show user / portal is asynchronous
-- Show order: 1. Publish 2. Persist 3. Push websocket
+- Explain API vs subscriber use case
+- Show portal is asynchronous
+- Show websocket
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Stateful service components]
 @snap[north-west span-20]
 @box[bg-orange text-white rounded tc-small-box](Architecture#Stateful service components)
 @snapend
-![](akka-kafka/assets/img/stateful-service-components.svg)
+![](akka-kafka/assets/img/stateful-service-components.png)
 
 Note:
--
+- Explain subscriber-publisher use case
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Stateful service flow]
@@ -206,27 +207,29 @@ Note:
 
 @snap[center]
 <br>
-![](akka-kafka/assets/img/stateful-service-flow.svg)
+![](akka-kafka/assets/img/stateful-service-flow.png)
 @snapend
 
 Note:
-- EntityActor uses Cluster Sharding and auto-passivation
-- Order of 1. Publish 2. Persist -> Lightbend Lagom
+- Explain EntityActor uses Cluster Sharding and auto-passivation
 - Akka 2.5.18 https://github.com/akka/akka/issues/25512 auto-passivation in Sharding Typed
 
 ---?image=akka-kafka/assets/img/bg/monit-kafka.png&opacity=40
 @title[Clustered infrastructure]
 @snap[north-west span-25]
-@box[bg-orange text-white rounded tc-small-box](Architecture#Clustered infrastructure)
+@box[bg-orange text-white rounded tc-small-box](Architecture#Infrastructure)
 @snapend
 
-![](akka-kafka/assets/img/kafka-deployment.svg)
+@snap[center]
+<br>
+![](akka-kafka/assets/img/kafka-deployment.png)
+@snapend
 
 Note:
-- Zookeeper - master
-- Broker - controller
-- partition - leader / follower
-- Consuomer group
+- Explain Zookeeper - master
+- Explain Broker - controller
+- Explain partition - leader / follower
+- Explain consumer group
 
 ---?image=akka-kafka/assets/img/bg/kafka-server-properties.png&opacity=40
 @title[Broker configuration]
@@ -234,20 +237,21 @@ Note:
 @box[bg-orange text-white rounded tc-small-box](Architecture#Broker configuration)
 @snapend
 
-@snap[north-west]
-<br>
-<br>
-@size[0.6em](Use documentation defaults, not distribution defaults)  
-@size[0.6em](When using only one DC, persist the log, but not in /tmp)
-@snapend
-
 ```console
-num.partitions=2  
+// Use documentation defaults, not distribution defaults
+
+num.partitions=2
+
 default.replication.factor=3  
+
 min.insync.replicas=2  
+
 offsets.topic.replication.factor=3  
+
 offsets.retention.minutes=10080  
-log.dir=/opt/kafka/spool  
+
+log.dir=/opt/kafka/spool // not in /tmp when using one DC
+
 controlled.shutdown.enable=true
 ```
 
@@ -257,15 +261,110 @@ https://kafka.apache.org/documentation/#configuration
 
 Note:
 - /opt/kafka/kafka_1.1.1/config/server.properties
-- broker log.dir when using only one DC, persist the log, but not in /tmp
-- consumer auto.offset.reset latest
-- Use broker documentation defaults, not distribution defaults nor examples
+
+---?image=assets/img/bg/tradecloud-light-blue.png
+@title[Messages Structure]
+@snap[north-west span-25]
+@box[bg-blue text-white waved tc-small-box](Messages#Structure)
+@snapend
+
+```scala
+package com.tradecloud1.messages
+```
+
+```scala
+trait Event {
+  def publishTopics: Seq[String]
+  def meta: MessageMeta
+}
+```
+
+```scala
+sealed trait OrderEvent extends Event {
+  def id: String
+```
+
+```scala
+final case class OrderIssuedByBuyer(
+    id: String,
+    lines: Seq[OrderLine],
+...
+) extends OrderEvent {
+  val publishTopics: Seq[String] = ...
+```
+
+Note:
+- Explain Git submodule messages
+- Show OrderIssuedByBuyer
+
+---?image=assets/img/bg/tradecloud-light-blue.png
+@title[Messages Metadata]
+@snap[north-west span-25]
+@box[bg-blue text-white waved tc-small-box](Messages#Metadata)
+@snapend
+
+```scala
+case class MessageMeta(
+    messageId: UUID = UUID.randomUUID(),
+    source: MessageSource,
+    createdDateTime: DateTime = DateTime.now()
+)
+```
+
+```scala
+case class MessageSource(
+    traceId: UUID = UUID.randomUUID(),
+    userId: Option[UUID],
+    companyId: Option[UUID]
+)
+```
+
+Note:
+- Explain: used for tracing and activity stream
+
+---?image=assets/img/bg/tradecloud-light-blue.png
+@title[Messages Serialization]
+@snap[north-west span-25]
+@box[bg-blue text-white waved tc-small-box](Messages#Serialization)
+@snapend
+
+```protobuf
+syntax = "proto3";
+option java_package = "com.tradecloud1.messages.order";
+
+message OrderIssuedByBuyerMsg {
+    google.protobuf.StringValue id    = 1;
+    repeated order.OrderLineMsg lines = 2;
+...
+```
+
+```scala
+class ProtobufSerializer extends SerializerWithStringManifest
+  with OrderToProtobufTransformers 
+  with OrderFromProtobufTransformers {
+  
+  val OrderIssuedByBuyerManifest = "900"
+
+  def toBinary(o: AnyRef): Array[Byte]
+  def fromBinary(bytes: Array[Byte], manifest: String): AnyRef
+```
+
+@snap[south-west tc-link span-45]
+https://doc.akka.io/docs/akka/current/serialization.html
+@snapend
+
+Note:
+- Explain: Protobuf compiled to Scala and Golang
+- Explain: Also using Json for data migration 
+- Show: OrderToProtobufTransformers / OrderFromProtobufTransformers
 
 ---?image=akka-kafka/assets/img/bg/alpakkas.jpg&opacity=40
 @title[Alpakka Kafka]
 @snap[north-west span-25]
 @box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka)
 @snapend
+
+@size[0.8em](Alpakka Kafka a.k.a. akka-stream-kafka f.k.a. reactive-kafka)
 
 ```scala
   val control =
@@ -280,9 +379,6 @@ Note:
       .toMat(Sink.seq)(Keep.both)
       .mapMaterializedValue(DrainingControl.apply)
       .run()
-
-def business(key: String, value: Array[Byte]): 
-  Future[Done] = // ???
 ```
 
 @snap[south-west tc-link span-45]
@@ -292,12 +388,13 @@ https://github.com/akka/alpakka-kafka
 @snapend
 
 Note:
-- marketing Alpakka Kafka, library akka-stream-kafka
+- Explain marketing Alpakka Kafka, library akka-stream-kafka, previous reactive-kafka
 - Camel still maintained, but Kakfa docs do not look good 
+
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka]
 @snap[north-west span-25]
-@box[bg-pink text-white tc-small-box](Libraries#akka-kafka)
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka intro)
 @snapend
 
 ```scala
@@ -320,24 +417,91 @@ publisher.publish("topic", msg)
 
 @snap[south-west tc-link span-45]
 https://github.com/tradecloud/akka-kafka
+@snapend
+
+Note:
+- Tell: Wrapper around akka-stream-kafka
+- Tell purpose: Resilience, Batching
+- Tell purpose: Akka Serialization
+- Show order listener
+- Show order publisher
+
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Tradecloud Akka Kafka config]
+@snap[north-west span-25]
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka config)
+@snapend
+
+Backoff, batching, and consumer configuration
+
+```scala
+final class KafkaSubscriber(
+    group: String,
+    topics: Set[String],
+    serviceName: Option[String] = None,
+    minBackoff: Option[FiniteDuration] = None,
+    maxBackoff: Option[FiniteDuration] = None,
+    batchingSize: Option[Int] = None,
+    batchingInterval: Option[FiniteDuration] = None,
+    configurationProperties: Seq[(String, String)] = Seq.empty
+```
+@snap[south-west tc-link span-45]
+https://github.com/tradecloud/akka-kafka
+@snapend
+
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Tradecloud Akka Kafka Inside]
+@snap[north-west span-25]
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka inside)
+@snapend
+
+Flow build in KafkaSubscriber  
+used in KafkaSubscriberActor
+
+```scala
+  def atLeastOnceStream[T](flow: Flow[KafkaMessage[T], ... 
+    consumerSource
+      .via(deserializeFlow)
+      .via(filterTypeFlow[T])
+      .via(flow)
+      .via(commitFlow)
+```
+
+@snap[south-west tc-link span-45]
+https://github.com/tradecloud/akka-kafka
+@snapend
+
+Note:
+- Show KafkaSubscriber and KafkaSubscriberActor
+- Show KafkaMessage
+
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Tradecloud Akka Kafka Inside]
+@snap[north-west span-25]
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka inside)
+@snapend
+
+Flow build in KafkaPublisher  
+used in KafkaPublisherActor
+
+```scala
+  def serializeAndPublishFlow(withRetries: Boolean)
+      ...
+      // connect the graph
+      prefixFlowShape ~> broadcast.in
+      broadcast.out(0) ~> serializerFlow ~> publishFlow(withRetries) ~> zip.in0
+      broadcast.out(1) ~> publishCmdBufferFlow ~> zip.in1
+      zip.out ~> resultTransformerShape
+```
+
+@snap[south-west tc-link span-45]
+https://github.com/tradecloud/akka-kafka
 https://doc.akka.io/docs/akka/current/serialization.html
 @snapend
 
 Note:
-- Wrapper around akka-stream-kafka
-- Resilience
-- Akka Serialization
----
-### Akka-Kafka inner workings
+- Show KafkaPublisher and KafkaPublisherActor
 
-Subscriber
-Publisher
-
----
-### Akka-Kafka example usage
-
-Subscriber
-Publisher
 ---?image=assets/img/bg/201612-foto-yesdelft-met-rutte.jpg&opacity=60
 @title[Wrap up]
 @snap[north-west]
@@ -354,6 +518,10 @@ Publisher
 @size[1.0em](YES!Delft building)
 @snapend
 
+@snap[south-west tc-link span-50]
+https://gitpitch.com/tradecloud/gitpitch/master?p=akka-kafka  
+https://github.com/tradecloud/akka-kafka
+@snapend
 ---?video=https://www.yesdelft.com/wp-content/themes/yesdelft-website/assets/vid/header-video.mp4
 @title[Join Tradecloud]
 Join Tradecloud at YES!Delft  
