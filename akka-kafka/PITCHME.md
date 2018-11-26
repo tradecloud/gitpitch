@@ -1,4 +1,4 @@
----?image=akka-kafka/assets/img/bg/Open19-Rack-Photo.jpg&opacity=40
+---?image=akka-kafka/assets/img/bg/Open19-Rack-Photo-black-50pct.jpg
 @title[Intro]
 
 @snap[west title span-50]
@@ -26,8 +26,12 @@ Note:
 - Show open19 project
 - Show packet.net server
 - ASK FOR QUESTIONS DURING THE PRESENTATION
+- 20:00 - 20:45
+- average 2 min. per slide
+- end 20:02
+- to create opacity images: convert alpakkas.jpg -fill black -colorize 50% alpakkas-black-50pct.jpg
 
----?image=assets/img/bg/tradecloud-light-blue.png&position=left
+---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Menu]
 
 @snap[north-west span-35]
@@ -45,6 +49,9 @@ Note:
 @snap[south-east span-35]
 @box[bg-pink text-white](Libraries#akka-stream-kafka<br>akka-kafka)
 @snapend
+
+Note:
+- end 20:03
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Kafka for managers]
@@ -77,6 +84,7 @@ https://thenewstack.io/apache-kafka-primer/
 Note:
 - Show Kafka manager - one topic - 2 partitions - consumers
 - Explain consumers groups
+- end 20:06
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Use cases of Kafka]
@@ -113,7 +121,7 @@ https://kafka.apache.org/documentation/streams/
 
 Note:
 - Show Samza site
-- Show Fabric site, tell about Simplified Byzantine Fault Tolerance alternative
+- end 20:08
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left&size=50% 100%
 @title[Pro's and cons of Kafka]
@@ -157,6 +165,7 @@ Note:
 - Show LinkedIn Kafka scale
 - Show and scroll through Kafka configuration page
 - Show Burrow features
+- end 20:11
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Event-driven components]
@@ -172,7 +181,8 @@ https://martinfowler.com/articles/201701-event-driven.html
 Note:
 - Show Fowler article, What do you mean by “Event-Driven”?
 - Explain write and read side
-
+- end 20:13
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Event-driven flow]
 @snap[north-west span-25]
@@ -188,6 +198,7 @@ Note:
 - Explain API vs subscriber use case
 - Show portal is asynchronous
 - Show websocket
+- end 20:16
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Stateful service components]
@@ -197,8 +208,8 @@ Note:
 ![](akka-kafka/assets/img/stateful-service-components.png)
 
 Note:
-- Explain subscriber-publisher use case
-
+- end 20:18
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Stateful service flow]
 @snap[north-west span-25]
@@ -213,8 +224,10 @@ Note:
 Note:
 - Explain EntityActor uses Cluster Sharding and auto-passivation
 - Akka 2.5.18 https://github.com/akka/akka/issues/25512 auto-passivation in Sharding Typed
-
----?image=akka-kafka/assets/img/bg/monit-kafka.png&opacity=40
+- https://doc.akka.io/docs/akka/current/typed/cluster-sharding.html#persistence-example
+- end 20:20
+  
+---?image=akka-kafka/assets/img/bg/monit-kafka-black-50pct.png
 @title[Clustered infrastructure]
 @snap[north-west span-25]
 @box[bg-orange text-white rounded tc-small-box](Architecture#Infrastructure)
@@ -230,8 +243,9 @@ Note:
 - Explain Broker - controller
 - Explain partition - leader / follower
 - Explain consumer group
+- end 20:23
 
----?image=akka-kafka/assets/img/bg/kafka-server-properties.png&opacity=40
+---?image=akka-kafka/assets/img/bg/kafka-server-properties-black-50pct.png
 @title[Broker configuration]
 @snap[north-west span-25]
 @box[bg-orange text-white rounded tc-small-box](Architecture#Broker configuration)
@@ -261,7 +275,9 @@ https://kafka.apache.org/documentation/#configuration
 
 Note:
 - /opt/kafka/kafka_1.1.1/config/server.properties
-
+- start 00:34:00
+- end 20:24
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Messages Structure]
 @snap[north-west span-25]
@@ -296,6 +312,7 @@ final case class OrderIssuedByBuyer(
 Note:
 - Explain Git submodule messages
 - Show OrderIssuedByBuyer
+- end 20:27
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Messages Metadata]
@@ -321,6 +338,7 @@ case class MessageSource(
 
 Note:
 - Explain: used for tracing and activity stream
+- end 20:29
 
 ---?image=assets/img/bg/tradecloud-light-blue.png
 @title[Messages Serialization]
@@ -357,8 +375,9 @@ Note:
 - Explain: Protobuf compiled to Scala and Golang
 - Explain: Also using Json for data migration 
 - Show: OrderToProtobufTransformers / OrderFromProtobufTransformers
-
----?image=akka-kafka/assets/img/bg/alpakkas.jpg&opacity=40
+- end 20:31
+  
+---?image=akka-kafka/assets/img/bg/alpakkas-black-50pct.jpg
 @title[Alpakka Kafka]
 @snap[north-west span-25]
 @box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka)
@@ -390,7 +409,8 @@ https://github.com/akka/alpakka-kafka
 Note:
 - Explain marketing Alpakka Kafka, library akka-stream-kafka, previous reactive-kafka
 - Camel still maintained, but Kakfa docs do not look good 
-
+- end 20:33
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka]
 @snap[north-west span-25]
@@ -425,7 +445,8 @@ Note:
 - Tell purpose: Akka Serialization
 - Show order listener
 - Show order publisher
-
+- end 20:35
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka config]
 @snap[north-west span-25]
@@ -448,6 +469,9 @@ final class KafkaSubscriber(
 @snap[south-west tc-link span-45]
 https://github.com/tradecloud/akka-kafka
 @snapend
+
+Note:
+- end 20:37
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka Inside]
@@ -474,7 +498,8 @@ https://github.com/tradecloud/akka-kafka
 Note:
 - Show KafkaSubscriber and KafkaSubscriberActor
 - Show KafkaMessage
-
+- end 20:39
+  
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka Inside]
 @snap[north-west span-25]
@@ -501,8 +526,9 @@ https://doc.akka.io/docs/akka/current/serialization.html
 
 Note:
 - Show KafkaPublisher and KafkaPublisherActor
+- end 20:41
 
----?image=assets/img/bg/201612-foto-yesdelft-met-rutte.jpg&opacity=60
+---?image=assets/img/bg/201612-foto-yesdelft-met-rutte-black-20pct.jpg
 @title[Wrap up]
 @snap[north-west]
 @size[1.0em](Wrap up)
