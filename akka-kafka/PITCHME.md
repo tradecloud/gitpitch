@@ -535,7 +535,7 @@ used in KafkaPublisherActor
 
 @snap[south-west tc-link span-45]
 https://github.com/tradecloud/akka-kafka
-https://doc.akka.io/docs/akka/current/serialization.html
+https://developer.lightbend.com/docs/alpakka/current/patterns.html#passthrough
 @snapend
 
 Note:
