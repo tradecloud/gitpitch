@@ -378,9 +378,9 @@ Note:
 - end 20:31
   
 ---?image=akka-kafka/assets/img/bg/alpakkas-black-50pct.jpg
-@title[Alpakka Kafka]
-@snap[north-west span-25]
-@box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka)
+@title[Alpakka Kafka consumer]
+@snap[north-west span-30]
+@box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka consumer)
 @snapend
 
 @size[0.8em](Alpakka Kafka a.k.a. akka-stream-kafka f.k.a. reactive-kafka)
@@ -400,9 +400,9 @@ Note:
       .run()
 ```
 
-@snap[south-west tc-link span-45]
-https://developer.lightbend.com/docs/alpakka/current/
-https://doc.akka.io/docs/akka-stream-kafka/current/
+@snap[south-west tc-link]
+https://developer.lightbend.com/docs/alpakka/current/  
+https://doc.akka.io/docs/akka-stream-kafka/current/consumer.html  
 https://github.com/akka/alpakka-kafka
 @snapend
 
@@ -411,10 +411,35 @@ Note:
 - Camel still maintained, but Kakfa docs do not look good 
 - end 20:33
   
----?image=assets/img/bg/tradecloud-light-blue.png&position=left
+
+---?image=akka-kafka/assets/img/bg/alpakkas-black-50pct.jpg
 @title[Tradecloud Akka Kafka]
+
+@title[Alpakka Kafka producer]
+@snap[north-west span-30]
+@box[bg-pink text-white tc-small-box](Libraries#akka-stream-kafka producer)
+@snapend
+
+```scala
+ ProducerMessage.single(
+    new ProducerRecord("topicName", key, value),
+    passThrough
+  )
+```
+
+@snap[south-west tc-link]
+https://doc.akka.io/docs/akka-stream-kafka/current/producer.html
+@snapend
+
+Note:
+- Explain marketing Alpakka Kafka, library akka-stream-kafka, previous reactive-kafka
+- Camel still maintained, but Kakfa docs do not look good 
+- end 20:35
+  
+---?image=assets/img/bg/tradecloud-light-blue.png&position=left
+@title[Tradecloud Akka Kafka consumer]
 @snap[north-west span-25]
-@box[bg-pink text-white tc-small-box](Libraries#akka-kafka intro)
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka consumer)
 @snapend
 
 ```scala
@@ -430,12 +455,7 @@ new KafkaSubscriber(
   )
 ```
 
-```scala
-val publisher = new KafkaPublisher()
-publisher.publish("topic", msg)
-```
-
-@snap[south-west tc-link span-45]
+@snap[south-west tc-link]
 https://github.com/tradecloud/akka-kafka
 @snapend
 
@@ -445,33 +465,27 @@ Note:
 - Tell purpose: Akka Serialization
 - Show order listener
 - Show order publisher
-- end 20:35
+- end 20:37
+
   
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
-@title[Tradecloud Akka Kafka config]
+@title[Tradecloud Akka Kafka producer]
 @snap[north-west span-25]
-@box[bg-pink text-white tc-small-box](Libraries#akka-kafka config)
+@box[bg-pink text-white tc-small-box](Libraries#akka-kafka producer)
 @snapend
 
-Backoff, batching, and consumer configuration
-
 ```scala
-final class KafkaSubscriber(
-    group: String,
-    topics: Set[String],
-    serviceName: Option[String] = None,
-    minBackoff: Option[FiniteDuration] = None,
-    maxBackoff: Option[FiniteDuration] = None,
-    batchingSize: Option[Int] = None,
-    batchingInterval: Option[FiniteDuration] = None,
-    configurationProperties: Seq[(String, String)] = Seq.empty
+val publisher = new KafkaPublisher()
+publisher.publish("topic", msg)
 ```
-@snap[south-west tc-link span-45]
+
+@snap[south-west tc-link]
 https://github.com/tradecloud/akka-kafka
 @snapend
 
 Note:
-- end 20:37
+- Show order publisher
+- end 20:39
 
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka Inside]
@@ -498,7 +512,7 @@ https://github.com/tradecloud/akka-kafka
 Note:
 - Show KafkaSubscriber and KafkaSubscriberActor
 - Show KafkaMessage
-- end 20:39
+- end 20:41
   
 ---?image=assets/img/bg/tradecloud-light-blue.png&position=left
 @title[Tradecloud Akka Kafka Inside]
@@ -526,7 +540,7 @@ https://doc.akka.io/docs/akka/current/serialization.html
 
 Note:
 - Show KafkaPublisher and KafkaPublisherActor
-- end 20:41
+- end 20:43
 
 ---?image=assets/img/bg/201612-foto-yesdelft-met-rutte-black-20pct.jpg
 @title[Wrap up]
